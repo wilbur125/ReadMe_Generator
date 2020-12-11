@@ -1,0 +1,23 @@
+{
+  "name": "ReadMe_Generator",
+  "version": "1.0.0",
+  "description": "When creating a new open source project, it is important to have a well written README with information about the app. \r Having a good README Generator will allow contributors to spend more time working on finishing the project, and less time creating a good README.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilbur125/ReadMe_Generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wilbur125/ReadMe_Generator/issues"
+  },
+  "homepage": "https://github.com/wilbur125/ReadMe_Generator#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
