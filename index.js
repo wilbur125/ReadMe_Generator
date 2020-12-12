@@ -1,7 +1,11 @@
 const inquirer = require('inquirer');
+const fs = require('fs');
+const util = require('util');
 
-inquirer
-  .prompt([
+const writeFileAsync = util.promisify(fs.writeFile);
+
+function promptUser() {
+return inquirer.prompt([
       {
         type: 'input',
         name: 'title',
@@ -24,12 +28,12 @@ inquirer
       },
       {
         type: 'input', 
-        name: 'contribution',
+        name: 'contributing',
         message: 'Please provide contribution guidelines.'
       },
       {
         type: 'input', 
-        name: 'test',
+        name: 'tests',
         message: 'Please provide test instructions.'
       },
       {
@@ -42,15 +46,77 @@ inquirer
         type: 'input',
         name: 'github',
         message: 'What is your GitHub username?'
+      },
+      {
+        type:'input',
+        name: "email",
+        message: "Please enter your email address."
       }
   ])
-  .then(answers => {
-    // Use user feedback for... whatever!!
+};
+
+function generateREADME(answers) {
+  return `
+  # ${answers.title}
+
+  ## Description
+
+  ${answers.description}
+
+  ## Table of Contents
+
+  * [Installation](#installation)
+
+  * [Usage](#usage)
+
+  * [License](#license)
+
+  * [Contributing](#contributing)
+
+  * [Tests](#tests)
+
+  * [Questions](#questions)
+
+  ## Installation
+
+  Run the following commands to install the necessary dependencies:
+
+  ${answers.installation}
+
+  ## Usage
+
+  ${answers.usage}
+
+
+  ## License
+
+  ${answers.license}
+
+  ## Contributing
+
+  ${answers.contributing}
+
+  ## Tests
+
+  ${answers.tests}
+
+  ## Questions
+
+  If you have any questions, please feel free to reach out to me via email at ${answers.email}
+
+  To view more of my work, please visit my GitHub at www.github.com/${answers.github}
+  `
+};
+
+promptUser()
+  .then(function(answers) {
+    const readme = generateREADME(answers);
+    return writeFileAsync("README.md", readme);
   })
-  .catch(error => {
-    if(error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      // Something else when wrong
-    }
+  .then(function() {
+    console.log("Success! Check out your README file.");
+  })
+  .catch(function(err) {
+    console.log(err);
   });
+  
