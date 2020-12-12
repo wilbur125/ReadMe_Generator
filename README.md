@@ -5,6 +5,8 @@
 
   When creating a new open source project, it is important to have a well written README with information about the app. Having a good README Generator will allow contributors to spend more time working on finishing the project, and less time creating a good README.
 
+  GitHub: https://github.com/wilbur125/ReadMe_Generator 
+
   ## Table of Contents
 
   * [Installation](#installation)
